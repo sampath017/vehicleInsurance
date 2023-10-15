@@ -3,18 +3,24 @@ package vehicleInsurance;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-class VehicleInsurance {
+
+class Insurance {
 	int policyNo;
 	int vehicleNo;
+	int customerId;
+
 	String customerName;
 	String toDate;
 	String policyType;
 
-	VehicleInsurance(int policyNo, int vehicleNo, String customerName, String toDate) {
+	Insurance(int policyNo, int vehicleNo, int customerId, String customerName, String toDate, String policyType) {
 		this.policyNo = policyNo;
 		this.vehicleNo = vehicleNo;
+		this.customerId = customerId;
+
 		this.customerName = customerName;
 		this.toDate = toDate;
+		this.policyType = policyType;
 	}
 
 	int getPolicyNo() {
@@ -31,6 +37,14 @@ class VehicleInsurance {
 
 	void setVehicleNo(int vehicleNo) {
 		this.vehicleNo = vehicleNo;
+	}
+
+	int getCustomerId() {
+		return customerId;
+	}
+
+	void setCustomerId(int customerId) {
+		this.customerId = customerId;
 	}
 
 	String getCustomerName() {
@@ -60,70 +74,149 @@ class VehicleInsurance {
 
 class ManageInsurance {
 	Scanner sc;
-	ArrayList<VehicleInsurance> insurances;
+	ArrayList<Insurance> insurances;
 
 	ManageInsurance() {
 		this.sc = new Scanner(System.in);
 	}
 
 	void createInsurances() {
-		System.out.print("Enter number of insurances: ");
+		System.out.print("\nEnter number of insurances: ");
 
-		int n = sc.nextInt(); sc.nextLine();
-		this.insurances = new ArrayList<VehicleInsurance>(n);
+		int n = sc.nextInt();
+		sc.nextLine();
+		this.insurances = new ArrayList<Insurance>(n);
 
 		for (int i = 0; i < n; i++) {
 			System.out.print("Insurance policyNo: ");
-			int policyNo = this.sc.nextInt(); this.sc.nextLine();
+			int policyNo = this.sc.nextInt();
+			this.sc.nextLine();
 
 			System.out.print("Insurance vehicleNo: ");
-			int vehicleNo = this.sc.nextInt(); sc.nextLine();
+			int vehicleNo = this.sc.nextInt();
+			sc.nextLine();
+
+			System.out.print("Insurance customerId: ");
+			int customerId = this.sc.nextInt();
+			sc.nextLine();
 
 			System.out.print("Insurance customerName: ");
 			String customerName = this.sc.nextLine();
-			
+
 			System.out.print("Insurance toDate: ");
 			String toDate = this.sc.nextLine();
+			
+			System.out.print("Insurance policyType: ");
+			String policyType = this.sc.nextLine();
 
-			this.insurances.add(new VehicleInsurance(policyNo, vehicleNo, customerName, toDate));
+			this.insurances.add(new Insurance(policyNo, vehicleNo, customerId, customerName, toDate, policyType));
 		}
 
+		System.out.println("All Insurances are taken.\n");
+	}
+
+	public void addInsurances() {
+		System.out.print("\nEnter number of insurances: ");
+
+		int n = sc.nextInt();
+		sc.nextLine();
+		ArrayList<Insurance> newInsurances = new ArrayList<Insurance>(n);
+
+		for (int i = 0; i < n; i++) {
+			System.out.print("Insurance policyNo: ");
+			int policyNo = this.sc.nextInt();
+			this.sc.nextLine();
+
+			System.out.print("Insurance vehicleNo: ");
+			int vehicleNo = this.sc.nextInt();
+			sc.nextLine();
+
+			System.out.print("Insurance customerId: ");
+			int customerId = this.sc.nextInt();
+			sc.nextLine();
+
+			System.out.print("Insurance customerName: ");
+			String customerName = this.sc.nextLine();
+
+			System.out.print("Insurance toDate: ");
+			String toDate = this.sc.nextLine();
+			
+			System.out.print("Insurance policyType: ");
+			String policyType = this.sc.nextLine();
+
+			newInsurances.add(new Insurance(policyNo, vehicleNo, customerId, customerName, toDate, policyType));
+		}
+
+		this.insurances.addAll(newInsurances);
+		insurances.clear();
 		System.out.println("All Insurances are taken.");
 	}
 
-	void updatePolicy() {
-		System.out.println("Update Policy");
+	void updatePolicyDate() {
+		System.out.println("Update Policy date.");
 
 		System.out.print("Enter the policy no: ");
-		int policyNo = this.sc.nextInt();
+		int policyNo = this.sc.nextInt(); this.sc.nextLine();
 
 		System.out.print("Enter the date to updated: ");
-		String toDate = this.sc.nextLine();
+		String toDate = this.sc.nextLine(); 
 
-		for (VehicleInsurance vi : this.insurances) {
-			if (vi.getPolicyNo() == policyNo) {
-				int index = this.insurances.indexOf(vi);
+		for (Insurance in : this.insurances) {
+			if (in.getPolicyNo() == policyNo) {
+				int index = this.insurances.indexOf(in);
 				this.insurances.get(index).setToDate(toDate);
-				System.out.println("Vehicle Insurance policy updated.");
+				System.out.println("Insurance policy date updated.");
 			} else
-				System.out.println("Vehicle Insurance not found!");
+				System.out.println("Insurance not found!");
+		}
+	}
+	
+	void updatePolicyType() {
+		System.out.println("Update Policy type.");
+
+		System.out.print("Enter the policy no: ");
+		int policyNo = this.sc.nextInt(); this.sc.nextLine();
+
+		System.out.print("Enter the policy type to updated: ");
+		String policyType = this.sc.nextLine(); 
+
+		for (Insurance in : this.insurances) {
+			if (in.getPolicyNo() == policyNo) {
+				int index = this.insurances.indexOf(in);
+				this.insurances.get(index).setToDate(policyType);
+				System.out.println("Insurance policy type updated.");
+			} else
+				System.out.println("Insurance not found!");
 		}
 	}
 
-	void viewPolicy() {
-		System.out.println("View Policy");
+	void viewInsurance() {
+		System.out.println("View Insurance");
 
 		System.out.print("Enter the policy no: ");
 		int policyNo = this.sc.nextInt();
 
-		for (VehicleInsurance vi : this.insurances) {
-			if (vi.getPolicyNo() == policyNo) {
-				System.out.println(vi.getPolicyNo());
-				System.out.println(vi.getVehicleNo());
-				System.out.println(vi.getCustomerName());
-				System.out.println(vi.getToDate());
+		for (Insurance in : this.insurances) {
+			if (in.getPolicyNo() == policyNo) {
+				System.out.println(in.getPolicyNo());
+				System.out.println(in.getVehicleNo());
+				System.out.println(in.getCustomerId());
+				System.out.println(in.getCustomerName());
+				System.out.println(in.getToDate());
+				System.out.println(in.getPolicyType());
 			} else
-				System.out.println("Vehicle Insurance not found!");
+				System.out.println("Insurance not found!");
+		}
+	}
+
+	public void viewInsurances() {
+		for (Insurance in : this.insurances) {
+			System.out.println("Insurance PolicyNo: " + in.getPolicyNo());
+			System.out.println("Insurance VehicleNo: " + in.getVehicleNo());
+			System.out.println("Insurance CustomerId: " + in.getCustomerId());
+			System.out.println("Insurance CustomerName: " + in.getCustomerName());
+			System.out.println("Insurance ToDate: " + in.getToDate());
+			System.out.println("Insurnace PolicyType: " + in.getPolicyType());
 		}
 	}
 }
