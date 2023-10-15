@@ -20,7 +20,7 @@ class Console {
 		this.mu.createUnderwriters();
 //		this.mi.createInsurances();
 
-		String multiLineString = ("" + "Welcome to console based Vehicle Insurance Management System.\n"
+		String multiLineString = ("\n" + "Welcome to console based Vehicle Insurance Management System.\n"
 				+ "The Rules are:\n" + "1. Type 'QUIT' to exit. \n" + "2. Type 'MU' to manage Underwriters. \n"
 				+ "3. Type 'MI' to manage Insurances.");
 

@@ -93,7 +93,7 @@ class ManageUnderwriter {
 		}
 		this.underwriters.addAll(newUnderwriters);
 		newUnderwriters.clear();
-		System.out.println("All Underwriters are taken.");
+		System.out.println("\nAll Underwriters are taken.");
 	}
 
 	public void viewUnderwriter(int id) {
@@ -102,6 +102,7 @@ class ManageUnderwriter {
 				System.out.println("Underwriter Id: " + uw.getId());
 				System.out.println("Underwriter Name: " + uw.getName());
 				System.out.println("Underwriter Password: " + uw.getPassword());
+				break;
 			} else
 				System.out.println("No Underwriter found!");
 		}
